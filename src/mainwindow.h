@@ -18,10 +18,10 @@
  */
 
 #include <QTimer>
-#include <QLabel>
+#include "port_qt.h"
 
 
-class MainWindow : public QLabel
+class MainWindow : public DEFOULT_CLASS
 {
     Q_OBJECT
 
@@ -35,6 +35,9 @@ protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent *event);
+#if USE_QWIDGET || USE_QOPENGL
+    void paintEvent(QPaintEvent *event);
+#endif
 //  virtual bool eventFilter(QObject *obj, QEvent *event);
 
 private:

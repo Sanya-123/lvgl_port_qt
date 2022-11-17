@@ -13,14 +13,14 @@ static lv_indev_state_t touchpad_old_state = LV_INDEV_STATE_REL;
 static void disp_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t * color_p);
 static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 
-static QLabel *displayLabel;
-static QImage displayImage(LV_HOR_RES, LV_VER_RES, QImage::Format_RGB32);
+static DEFOULT_CLASS *displayWidget;
+QImage displayImage(LV_HOR_RES, LV_VER_RES, QImage::Format_RGB32);
 
 
-void init_disp(QLabel *label)
+void init_disp(DEFOULT_CLASS *widget)
 {
     lv_init();
-    displayLabel = label;
+    displayWidget = widget;
     static lv_disp_draw_buf_t draw_buf_dsc_1;
     static lv_color_t buf_1[DISP_BUF_SIZE];                          /*A buffer for 10 rows*/
     lv_disp_draw_buf_init(&draw_buf_dsc_1, buf_1, NULL, DISP_BUF_SIZE);   /*Initialize the display buffer*/
@@ -97,7 +97,11 @@ static void updateDisplay (const lv_area_t * area, lv_color_t * color_p, bool la
         }
     }
     if (last) {
-        displayLabel->setPixmap(QPixmap::fromImage(displayImage));
+#if USE_QLABEL
+        displayWidget->setPixmap(QPixmap::fromImage(displayImage));
+#elif USE_QWIDGET || USE_QOPENGL
+        displayWidget->update();
+#endif
     }
 
 }
