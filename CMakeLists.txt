@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(lvgl_qt_sim_my)
+project(lvgl_port_qt)
 enable_language(C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
