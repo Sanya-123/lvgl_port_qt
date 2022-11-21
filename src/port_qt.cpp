@@ -14,11 +14,12 @@ static void disp_flush(lv_disp_drv_t * disp, const lv_area_t * area, lv_color_t 
 static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 
 static DEFOULT_CLASS *displayWidget;
-QImage displayImage(LV_HOR_RES, LV_VER_RES, QImage::Format_RGB32);
+QImage displayImage;
 
 
 void init_disp(DEFOULT_CLASS *widget)
 {
+    displayImage = QImage(LV_HOR_RES, LV_VER_RES, QImage::Format_RGB32);
     lv_init();
     displayWidget = widget;
     static lv_disp_draw_buf_t draw_buf_dsc_1;
